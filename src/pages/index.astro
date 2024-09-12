@@ -1,0 +1,66 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { getPages } from "@/graphql"
+import { MainBanner } from "c/index"
+import AnimatedSection from "c/CardsSection/AnimatedSection"
+import Slider from "c/Slider"
+import AnimatedSectionBMS from "c/BMSSection/AnimatedSection"
+import MainCardsGrid from "../components/CardMainPage/MainCardsGrid"
+
+const { slug } = Astro.params
+
+const pageInfo = await getPages(slug)
+
+if (!pageInfo) return Astro.redirect("/404")
+
+const { title, description, imagen } = pageInfo
+const attributes = pageInfo.attributes || {}
+
+const mainCards = attributes.contenido.filter(
+  (item) => item.__typename === "ComponentComponentesMainCards"
+).map(card => ({
+  title: card.title,
+  info: card.info,
+  icon: card.icon.data.attributes.url
+}));
+
+
+---
+
+{pageInfo && 
+  <Layout title={title} description={description} image={imagen}>
+      {
+        attributes.contenido.map((content, index) => {
+          const { __typename: name } = content
+
+          if (imagen && index === 0) {
+            return <MainBanner image_link={imagen.data.attributes.url} link="/servicios" alt={imagen.data.attributes.alternativeText} />
+          }
+          if (name === 'ComponentComponentesImagenPrincipal') { 
+            const { images_modal, images_modal_mobile } = content
+            return <Slider client:load images={images_modal.data} imagesMobile={images_modal_mobile.data}/>
+          }
+          if (name === 'ComponentComponentesSeccionBms') {
+            const { titulo, texto } = content
+            return (
+              <>
+                <AnimatedSectionBMS client:load titulo={titulo} texto={texto} />
+                {mainCards.length > 0 && <MainCardsGrid cards={mainCards} />}
+              </>
+            );
+          }
+          if (name === 'ComponentComponentesSectionRows') {
+            const { title1, title2, title3, text1, text2, text3, image } = content
+
+            const texts = [
+              { title: title1, description: text1 },
+              { title: title2, description: text2 },
+              { title: title3, description: text3 }
+            ]
+      
+            return <AnimatedSection client:load texts={texts} image={image} />
+          }
+        })
+      }
+  </Layout>
+}

@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'OktaNeue';
+    src: url('/public/fonts/OktaNeue-Normal.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'OktaNeue';
+    src: url('/public/fonts/OktaNeue-SemiBold.ttf') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: 'OktaNeue';
+    src: url('/public/fonts/OktaNeue-Light.ttf') format('ttf');
+    font-weight: 300;
+    font-style: normal;
+}  
+
+@font-face {
+    font-family: 'OktaNeue';
+    src: url('/public/fonts/OktaNeue-Medium.ttf') format('ttf');
+    font-weight: 500;
+    font-style: normal;
+}

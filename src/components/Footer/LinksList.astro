@@ -1,0 +1,17 @@
+---
+interface Props {
+ linkInfo: { texto: string; link: string }[]
+}
+
+const {linkInfo} = Astro.props
+---
+<ul class="flex gap-10 justify-center">
+ {linkInfo.map((linkInf, i) => {
+  const {texto, link} = linkInf
+
+  return <li class={`text-base lg:text-lg ${i === 0 ? '' : 'list-disc'}`}>
+    <a href={link}>{texto}</a> 
+   </li>
+ })}
+</ul>
+

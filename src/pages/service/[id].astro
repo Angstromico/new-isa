@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ImagesGallery from "c/ImagesGallery";
+import { getServiceInfo } from "@/graphql";
+import type { Service } from '@/types';
+import { IMAGES_URL } from '@/constants';
+
+export async function getStaticPaths() {
+  const servicesInfo = await getServiceInfo();
+  console.log("Services info in getStaticPaths", servicesInfo);
+
+  const paths = servicesInfo.map((service, index) => ({
+    params: { id: String(index + 1) },
+    props: { service },
+  }));
+  return paths;
+}
+
+const { service }: { service: Service } = Astro.props;
+---
+
+{service ? (
+  <Layout title={service.Title} description={service.FirstText} image={service.MainImage.data.attributes.url}>
+    <div class='relative w-full overflow-x-hidden md:pr-[160px] md:pl-[160px]'>
+      <div class='flex mt-[100px] flex-col md:flex-row items-center md:items-start justify-center md:justify-between md:space-x-8 px-4 py-8 w-full md:px-16 md:py-16 md:mt-[120px]'>
+        <div class="w-full md:w-3/4 space-y-4"> 
+          <a href="/services" class="text-white text-[24px] flex items-center space-x-2 md:px-5">
+            <span>&larr;</span>
+            <span>Volver Atrás</span>
+          </a>
+          <div class="flex items-stretch space-x-4">
+            <div class="w-[10px] mb-2 pl-2 md:pl3 bg-gradient-to-b mt-8 from-azulGradiente to-verdeGradiente"></div>
+            <h2 class="text-[30px] pr-4 md:text-[50px]  font-bold uppercase mt-5 flex items-center">{service.Title}</h2>
+          </div>
+          <p class="text-[20px] mt-4 md:text-[28px] md:py-20">
+            {service.FirstText}
+          </p>
+        </div>
+      </div>
+
+      <div class="absolute top-[-60px] right-[-130px] md:top-[-780px] md:right-[-720px] flex justify-end items-center overflow-hidden">
+        <img src="/Servicio_1_Marco.png" alt="Decorative Circle" class="w-[300px] md:w-[1500px] md:h-[1500px]" />
+        <img 
+        src={IMAGES_URL + service.MainImage.data.attributes.url} 
+        alt={service.MainImage.data.attributes.alternativeText} 
+        class="absolute w-[250px] h-[250px] right-[26px] top-[26px] md:right-[178px] md:top-[178px] md:w-[1200px] md:h-[1200px] object-fill rounded-full"
+        />
+      </div>
+    </div>
+
+    <div class="md:px-16 mt-4">
+      <ImagesGallery client:load images={service.CarruselImage.data.map(img => img.attributes)} />
+    </div>
+
+    <div class="text-[20px] w-full mb-4 mt-4 md:pr-[200px] md:pl-[205px] px-4 md:my-16">
+      {service.SecondText}
+    </div>
+  </Layout>
+) : (
+  <Layout title="Service Not Found" description="Service information is not available.">
+    <div class="text-[20px] w-full mb-4 mt-4 md:pr-[200px] md:pl-[205px] px-4 md:my-16">
+      The requested service could not be found. Please check the URL or try again later.
+    </div>
+  </Layout>
+)}

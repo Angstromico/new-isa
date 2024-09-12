@@ -1,0 +1,14 @@
+---
+import MapComponent from './MapComponent.jsx'
+---
+
+<section class=" mt-[60px] md:mt-[200px] md:mx-[160px]">
+    <div class="flex h-auto">
+        <div class="bg-gradient-to-t from-azulGradiente from-0% to-verdeGradiente to-100% h-auto w-[10px] mx-[24px] " />
+        <h2 class=" text-[30px] font-400 uppercase md:text-[50px] "> Nuestra Ubicación </h2>
+    </div>
+    
+    
+    <MapComponent client:only="react" />
+</section>
+

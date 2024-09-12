@@ -1,0 +1,17 @@
+---
+import { BASE_URL ,IMAGES_URL } from "@/constants"
+
+interface Props {
+ image_link: string
+ link: string 
+ alt: string
+}
+
+const { image_link, alt } = Astro.props
+const deskImg = IMAGES_URL + image_link
+
+---
+
+ <img class="mt-20 md:w-full md:mt-0" src={deskImg} alt={alt ? alt : ''}></img>
+
+

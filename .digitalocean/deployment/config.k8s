@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: isa-frontend
+spec:
+  selector:
+    matchLabels:
+      app: isa-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: isa-frontend
+    spec:
+      containers:
+      - name: web
+        image: <IMAGE>
+        env:
+          - name: NODE_TLS_REJECT_UNAUTHORIZED
+            value: '0'
+          - name: PUBLIC_BASE_URL
+            value: /isa
+          - name: PUBLIC_STRAPI_ENV
+            value: https://staging.qantamedia.com/isa/api/graphql
+          - name: PUBLIC_STRAPI_IMAGES
+            value: https://staging.qantamedia.com/isa/api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: isa-frontend
+spec:
+  selector:
+    app: isa-frontend
+  ports:
+  - name: isa-frontend
+    port: 80

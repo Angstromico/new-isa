@@ -1,0 +1,52 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getPagesAll } from "@/graphql";
+import { BMSSection, Square, MapSection, FormSection } from "c/index";
+import SliderText from "c/SliderText";
+import Nosotros from "@/components/NosotrosPage/Selector";
+import ServiceBanner from "@/components/ServiciosMainPage/index";
+
+export async function getStaticPaths() {
+  return await getPagesAll();
+}
+
+const { pageInfo }: { pageInfo: { attributes?: any, title: string, description: string, imagen: any, titulo: string } } = Astro.props;
+const { title, description, imagen, titulo } = pageInfo;
+const attributes = pageInfo.attributes || {};
+
+---
+
+{attributes && 
+  <Layout title={title} description={description} image={imagen}>
+      { attributes.imagen.data && 
+        (attributes.slug === "services" && (
+          <ServiceBanner pageInfo={pageInfo} />
+        ))
+      }
+
+      { attributes.contenido.map(content => {
+        const { __typename: name} = content;
+              
+        if(name === 'ComponentComponentesSeccionBms') {
+          const {titulo, barra, texto, barraMobil} = content;
+      
+          return <BMSSection titulo={titulo} barra={barra} texto={texto} barraMobil={barraMobil} />;
+        }
+        if(name === 'ComponentComponentesCuadros') {
+          const {cuadro1, cuadro2, cuadro3} = content;
+      
+          return <Square cuadro1={cuadro1} cuadro2={cuadro2} cuadro3={cuadro3} />;
+        }
+        if(name === 'ComponentComponentesFormComponent') {          
+          return <FormSection />;
+        }
+      })
+      }
+
+      {attributes.slider.length > 0 && <SliderText client:load mainTitle={attributes.titulo} sliders={attributes.slider} backGroundImage={attributes.BackgroundImage_Main_Services} />}
+
+      {attributes.mapSection  && <MapSection />}
+
+      { attributes.Nosotros === true && <Nosotros {pageInfo} client:load />}
+  </Layout>
+}

@@ -1,0 +1,64 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { getPages } from "@/graphql"
+import { MainBanner, BMSSection, Square } from "c/index"
+import { getInfoFromImg } from "@/hooks"
+
+const pages = await getPages()
+
+const pageInfo = pages?.find(page => {
+ const { attributes } = page
+ const { slug } = attributes
+ return slug === Astro.url.pathname
+})
+
+const getMainImg = () => {
+  if(pageInfo) {
+   try {
+    const { attributes } = pageInfo
+    const { imagen } = attributes
+    if(!imagen) return null
+    const mainImg = getInfoFromImg(imagen)
+    return mainImg
+   } catch (error) {
+    console.error(error)
+    return null
+   }
+ }
+}
+
+const mainImg = getMainImg()
+
+const getAttributes = () => {
+ if(pageInfo) {
+  const {attributes} = pageInfo
+  return attributes
+ }
+}
+
+const attributes = getAttributes()
+
+---
+
+{attributes && <Layout title={attributes.titulo} description={attributes.descripcion} image={mainImg ? mainImg.url : undefined} >
+ {attributes.contenido?.map(content => {
+  const { __typename: name} = content
+
+  if(name === 'ComponentComponentesImagenPrincipal') {
+   const { mobile, desk, btnTexto, link } = content
+   
+   return <MainBanner btnTexto={btnTexto} link={link} mobil={mobile} desk={desk} />
+  }
+  if(name === 'ComponentComponentesSeccionBms') {
+    const {titulo, barra, texto, barraMobil} = content
+
+    return <BMSSection titulo={titulo} barra={barra} texto={texto} barraMobil={barraMobil} />
+  }
+  if(name === 'ComponentComponentesCuadros') {
+    const {cuadro1, cuadro2, cuadro3} = content
+
+    return <Square cuadro1={cuadro1} cuadro2={cuadro2} cuadro3={cuadro3} />
+  }
+ })}
+</Layout>}
+

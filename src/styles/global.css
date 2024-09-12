@@ -1,0 +1,25 @@
+@import 'swiper/swiper-bundle.css';
+
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for pagination bullets */
+.swiper-pagination-custom-bullet {
+    @apply w-[20px] h-[20px] mx-[16px] bg-black border-[#86B22C] border-2 rounded-full;
+}
+
+.swiper-pagination-custom-bullet-active {
+    @apply bg-[#86B22C];
+}
+
+/* Optional: Adjust the positioning of navigation buttons */
+.swiper-button-prev, .swiper-button-next {
+    @apply bg-black bg-opacity-50 rounded-full w-10 h-10;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+    @apply hidden;
+}

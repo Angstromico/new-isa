@@ -1,0 +1,38 @@
+---
+import type { ImageStrapi } from "@/types"
+import { getInfoFromImg } from "@/hooks"
+import MovingContainer from 'c/MovingContainer'
+
+interface Props {
+ cuadro1: ImageStrapi
+ cuadro2: ImageStrapi
+ cuadro3: ImageStrapi
+}
+
+const { cuadro1, cuadro2, cuadro3 } = Astro.props
+
+const img1 = getInfoFromImg(cuadro1)
+const img2 = getInfoFromImg(cuadro2)
+const img3 = getInfoFromImg(cuadro3)
+---
+<MovingContainer classSection="squares" client:visible>
+ <img src={img1.url} alt={img1.alt ? img1.alt : ''}></img>
+ <img src={img2.url} alt={img2.alt ? img2.alt : ''}></img>
+ <img src={img3.url} alt={img3.alt ? img3.alt : ''}></img>
+</MovingContainer>
+
+<style is:global>
+ .squares {
+  @apply max-w-square mx-auto w-full px-3 grid grid-cols-1 md:grid-cols-3 justify-center items-center my-16 transition-all duration-1000 md:duration-[2000ms] opacity-0 gap-2 md:gap-12 ease-out;
+  transform: translateX(-50%);
+ }
+ .squares.visible {
+  transform: translateX(0);
+ }
+ .squares.opacity {
+  opacity: 1;
+ }
+ .squares img {
+  @apply w-[90%] md:w-full max-w-[480px] mx-auto;
+ }
+</style>

@@ -1,0 +1,48 @@
+---
+import type { ImageStrapi } from "@/types"
+import { getInfoFromImg } from "@/hooks"
+import MovingContainer from "c/MovingContainer"
+
+interface Props {
+ titulo: string 
+ barra: ImageStrapi
+ texto: string
+ barraMobil: ImageStrapi
+}
+
+const {titulo, barra, texto, barraMobil} = Astro.props
+
+const barraImg = getInfoFromImg(barra)
+const barraTiny = getInfoFromImg(barraMobil)
+---
+
+<MovingContainer classSection="bms" client:visible>
+ <h2 class="title">{titulo}</h2>
+ <img class="img md:hidden" src={barraTiny.url} alt={barraTiny.alt ? barraTiny.alt : ''}></img>
+ <img class="hidden md:block img" src={barraImg.url} alt={barraImg.alt ? barraImg.alt : ''}></img>
+ <p>{texto}</p>
+</MovingContainer>
+
+<style is:global>
+ .bms {
+  @apply w-[90%] flex flex-col px-2 text-center md:text-left md:flex-row gap-2 py-2 my-8 md:gap-3 mx-auto justify-center items-center max-w-square max-h-60 transition-all ease-out  duration-1000 md:duration-[2000ms] opacity-0;
+  transform: translateX(-50%);
+ }
+
+ .bms.visible {
+  transform: translateX(0);
+ }
+ .bms.opacity {
+  opacity: 1;
+ }
+ .bms .title {
+  @apply font-black text-2xl md:text-9xl;
+ }
+ .bms .img {
+  @apply w-[90%] md:w-auto md:h-36;
+ }
+ .bms p {
+  @apply text-sm md:text-2xl font-light;
+ }
+</style>
+

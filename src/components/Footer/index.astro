@@ -1,0 +1,62 @@
+---
+import { getInfoFromImg } from "@/hooks"
+import IconText from './IconText.astro'
+import LinksList from './LinksList.astro'
+import { getFooter } from "@/graphql"
+
+const {line, footerInfo1, footerInfo2, links} = await getFooter()
+
+const lineImg = getInfoFromImg(line)
+const {icon, text} = footerInfo1
+const {icon: secondI, text: secondText} = footerInfo2
+const firstIcon = getInfoFromImg(icon)
+const secondIcon = getInfoFromImg(secondI)
+
+function wrapParentheses(text: string): string {
+  // Regular expression to find text within parentheses
+  const regex = /\(([^)]+)\)/;
+
+  // Check if the text contains parentheses
+  const match = text.match(regex);
+
+  if (match) {
+    // Extract the part within parentheses
+    const partInParentheses = match[0];
+
+    // Replace the part with the span element
+    return text.replace(partInParentheses, `<span class='font-light'>${partInParentheses}</span>`);
+  }
+
+  // Return the original text if no parentheses are found
+  return text;
+}
+
+const realText = wrapParentheses(text)
+const secondRealText = wrapParentheses(secondText)
+
+function groupIntoThrees(arr: { texto: string; link: string }[]) {
+  let result = [];
+  for (let i = 0; i < arr.length; i += 3) {
+    // Slice the array from the current index i to i+3 and push it into the result array
+    result.push(arr.slice(i, i + 3));
+  }
+  return result;
+}
+
+const mobileLinks = groupIntoThrees(links)
+---
+<footer class="w-full px-2 lg:px-6 flex justify-center flex-col pb-12">
+ <img class="w-[90%] max-w-[1000px] mx-auto mb-5 lg:mb-16" src={lineImg.url} alt={lineImg.alt ? lineImg.alt : 'Linea Colorida'}></img>
+
+ <IconText firstIcon={firstIcon} secondIcon={secondIcon} realText={realText} secondRealText={secondRealText} />
+
+ <div class="w-full flex flex-col gap-3 justify-center lg:hidden text-light">
+  {mobileLinks.map((group) => {
+    return <LinksList linkInfo={group} />
+  })}
+ </div>
+ <div class="w-full justify-center hidden lg:flex">
+  <LinksList linkInfo={links} />
+ </div>
+</footer>
+

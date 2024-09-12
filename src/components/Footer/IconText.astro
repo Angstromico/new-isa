@@ -1,0 +1,32 @@
+---
+type Image = {
+    url: string;
+    alt: string | undefined;
+}
+
+interface Props {
+ firstIcon: Image
+ secondIcon: Image
+ realText: string
+ secondRealText: string
+}
+
+import { Image } from "astro:assets"
+
+const {firstIcon, secondIcon, realText, secondRealText} = Astro.props
+---
+<div class="gap-3 lg:gap-24 xl:gap-32 justify-center flex flex-col lg:flex-row mb-6 lg:mb-10 mx-auto text-center mt-3">
+  <div class="flex justify-center gap-2 lg:gap-3">
+   <img class="w-5 h-5 lg:w-6 lg:h-6" src={firstIcon.url} alt={firstIcon.alt ? firstIcon.alt : 'Linea Colorida'}></img>
+   <p class="font-bold text-base lg:text-xl">
+    <Fragment set:html={realText} />
+   </p>
+  </div>
+  <div class="flex gap-2 lg:gap-3">
+   <img class="w-4 h-4 lg:w-6 lg:h-6" src={secondIcon.url} alt={secondIcon.alt ? secondIcon.alt : 'Linea Colorida'}></img>
+   <p class="font-bold text-base lg:text-xl">
+    <Fragment set:html={secondRealText} />
+   </p>
+  </div>
+ </div>
+
