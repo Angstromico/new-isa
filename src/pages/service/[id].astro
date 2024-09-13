@@ -5,15 +5,21 @@ import { getServiceInfo } from "@/graphql";
 import type { Service } from '@/types';
 import { IMAGES_URL } from '@/constants';
 
+
+
 export async function getStaticPaths() {
   const servicesInfo = await getServiceInfo();
   console.log("Services info in getStaticPaths", servicesInfo);
 
-  const paths = servicesInfo.map((service, index) => ({
-    params: { id: String(index + 1) },
+  function formatString(input: string) {
+    return input.toLowerCase().replace(/\s+/g, '')
+  }
+
+  return servicesInfo.map((service, index) => ({
+    params: { id: formatString(service.Title) },
+    //I got an error here, formatString is not defined 
     props: { service },
   }));
-  return paths;
 }
 
 const { service }: { service: Service } = Astro.props;

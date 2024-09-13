@@ -13,13 +13,13 @@ importers:
         version: 0.5.10(typescript@5.4.5)
       '@astrojs/react':
         specifier: ^3.3.2
-        version: 3.3.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11)
+        version: 3.3.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(vite@5.2.11)
       '@astrojs/tailwind':
         specifier: ^5.1.0
-        version: 5.1.0(astro@4.7.1(typescript@5.4.5))(tailwindcss@3.4.3)
+        version: 5.1.0(astro@4.7.1)(tailwindcss@3.4.3)
       '@react-spring/web':
         specifier: ^9.7.3
-        version: 9.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 9.7.3(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.3.1
         version: 18.3.1
@@ -40,10 +40,7 @@ importers:
         version: 0.6.0
       framer-motion:
         specifier: ^11.2.13
-        version: 11.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      isa-page:
-        specifier: 'file:'
-        version: file:(vite@5.2.11)
+        version: 11.2.13(react-dom@18.3.1)(react@18.3.1)
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -55,7 +52,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-intersection-observer:
         specifier: ^9.10.3
-        version: 9.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 9.10.3(react-dom@18.3.1)(react@18.3.1)
       react-responsive:
         specifier: ^10.0.0
         version: 10.0.0(react@18.3.1)
@@ -1296,9 +1293,6 @@ packages:
     resolution: {integrity: sha512-UcVfVfaK4Sc4m7X3dUSoHoozQGBEFeDC+zVo06t98xe8CzHSZZBekNXH+tu0NalHolcJ/QAGqS46Hef7QXBIMw==}
     engines: {node: '>=16'}
 
-  'isa-page@file:':
-    resolution: {directory: '', type: directory}
-
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
@@ -2384,7 +2378,7 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  '@astrojs/react@3.3.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11)':
+  '@astrojs/react@3.3.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(vite@5.2.11)':
     dependencies:
       '@types/react': 18.3.1
       '@types/react-dom': 18.3.0
@@ -2396,7 +2390,7 @@ snapshots:
       - supports-color
       - vite
 
-  '@astrojs/tailwind@5.1.0(astro@4.7.1(typescript@5.4.5))(tailwindcss@3.4.3)':
+  '@astrojs/tailwind@5.1.0(astro@4.7.1)(tailwindcss@3.4.3)':
     dependencies:
       astro: 4.7.1(typescript@5.4.5)
       autoprefixer: 10.4.19(postcss@8.4.38)
@@ -2794,7 +2788,7 @@ snapshots:
 
   '@react-spring/types@9.7.3': {}
 
-  '@react-spring/web@9.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@react-spring/web@9.7.3(react-dom@18.3.1)(react@18.3.1)':
     dependencies:
       '@react-spring/animated': 9.7.3(react@18.3.1)
       '@react-spring/core': 9.7.3(react@18.3.1)
@@ -3409,12 +3403,11 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@11.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.2.13(react-dom@18.3.1)(react@18.3.1):
     dependencies:
-      tslib: 2.6.2
-    optionalDependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+      tslib: 2.6.2
 
   fsevents@2.3.3:
     optional: true
@@ -3608,43 +3601,6 @@ snapshots:
   is-wsl@3.1.0:
     dependencies:
       is-inside-container: 1.0.0
-
-  isa-page@file:(vite@5.2.11):
-    dependencies:
-      '@astrojs/check': 0.5.10(typescript@5.4.5)
-      '@astrojs/react': 3.3.2(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11)
-      '@astrojs/tailwind': 5.1.0(astro@4.7.1(typescript@5.4.5))(tailwindcss@3.4.3)
-      '@react-spring/web': 9.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@types/react': 18.3.1
-      '@types/react-dom': 18.3.0
-      animejs: 3.2.2
-      aos: 2.3.4
-      astro: 4.7.1(typescript@5.4.5)
-      astro-seo-metadata: 0.6.0
-      framer-motion: 11.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      leaflet: 1.9.4
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-intersection-observer: 9.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-responsive: 10.0.0(react@18.3.1)
-      swiper: 11.1.4
-      tailwindcss: 3.4.3
-      tailwindcss-animated: 1.1.0(tailwindcss@3.4.3)
-      typescript: 5.4.5
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - '@types/node'
-      - less
-      - lightningcss
-      - prettier
-      - prettier-plugin-astro
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - ts-node
-      - vite
 
   isexe@2.0.0: {}
 
@@ -4203,9 +4159,8 @@ snapshots:
   postcss-load-config@4.0.2(postcss@8.4.38):
     dependencies:
       lilconfig: 3.1.1
-      yaml: 2.4.2
-    optionalDependencies:
       postcss: 8.4.38
+      yaml: 2.4.2
 
   postcss-nested@6.0.1(postcss@8.4.38):
     dependencies:
@@ -4255,10 +4210,9 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-intersection-observer@9.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-intersection-observer@9.10.3(react-dom@18.3.1)(react@18.3.1):
     dependencies:
       react: 18.3.1
-    optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
 
   react-is@16.13.1: {}
@@ -4600,7 +4554,7 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   tsconfck@3.0.3(typescript@5.4.5):
-    optionalDependencies:
+    dependencies:
       typescript: 5.4.5
 
   tslib@2.6.2: {}
@@ -4745,51 +4699,46 @@ snapshots:
       fsevents: 2.3.3
 
   vitefu@0.2.5(vite@5.2.11):
-    optionalDependencies:
+    dependencies:
       vite: 5.2.11
 
   volar-service-css@0.0.34(@volar/language-service@2.1.6):
     dependencies:
+      '@volar/language-service': 2.1.6
       vscode-css-languageservice: 6.2.14
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
-    optionalDependencies:
-      '@volar/language-service': 2.1.6
 
   volar-service-emmet@0.0.34(@volar/language-service@2.1.6):
     dependencies:
+      '@volar/language-service': 2.1.6
       '@vscode/emmet-helper': 2.9.3
       vscode-html-languageservice: 5.2.0
-    optionalDependencies:
-      '@volar/language-service': 2.1.6
 
   volar-service-html@0.0.34(@volar/language-service@2.1.6):
     dependencies:
+      '@volar/language-service': 2.1.6
       vscode-html-languageservice: 5.2.0
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
-    optionalDependencies:
-      '@volar/language-service': 2.1.6
 
   volar-service-prettier@0.0.34(@volar/language-service@2.1.6):
     dependencies:
-      vscode-uri: 3.0.8
-    optionalDependencies:
       '@volar/language-service': 2.1.6
+      vscode-uri: 3.0.8
 
   volar-service-typescript-twoslash-queries@0.0.34(@volar/language-service@2.1.6):
-    optionalDependencies:
+    dependencies:
       '@volar/language-service': 2.1.6
 
   volar-service-typescript@0.0.34(@volar/language-service@2.1.6):
     dependencies:
+      '@volar/language-service': 2.1.6
       path-browserify: 1.0.1
       semver: 7.6.0
       typescript-auto-import-cache: 0.3.2
       vscode-languageserver-textdocument: 1.0.11
       vscode-nls: 5.2.0
-    optionalDependencies:
-      '@volar/language-service': 2.1.6
 
   vscode-css-languageservice@6.2.14:
     dependencies:
